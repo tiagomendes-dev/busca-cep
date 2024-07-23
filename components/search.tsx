@@ -2,12 +2,13 @@
 
 import api from "@/app/api/api";
 import { useState } from "react";
+import { IMaskInput } from "react-imask";
 
 export default function Search() {
   const [input, setInput] = useState("");
-  const [cep, setCep] = useState({} as any);
+  const [cep, setCep] = useState<any>({});
 
-  async function handleSearch() {
+  const handleSearch = async () => {
     if (input === "") {
       alert("Preencha algum número de CEP!");
       return;
@@ -15,29 +16,36 @@ export default function Search() {
 
     try {
       const response = await api.get(`${input}/json`);
-      setCep(response.data);
-      setInput("");
-    } catch {
+      const data = response.data;
+      if (data) {
+        setCep(data);
+        setInput("");
+      } else {
+        alert("Ops, erro ao buscar.");
+        setInput("");
+      }
+    } catch (error) {
+      console.error(error);
       alert("Ops, erro ao buscar.");
       setInput("");
     }
-  }
+  };
 
   return (
     <>
-      <div className="group flex w-fit items-center rounded-full bg-indigo-100 group-hover:bg-red-200">
-        <div className="rounded-full bg-zinc-200">
-          <input
-            type="number"
-            value={input.replace(/\D/g, "").slice(0, 8)}
+      <div className="group flex w-fit items-center rounded-full bg-indigo-100 transition hover:bg-indigo-200">
+        <div className="relative rounded-full bg-zinc-200 shadow">
+          <IMaskInput
+            mask="00000-000"
+            value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="bg-transparent px-4 py-2 outline-none"
             placeholder="Digite o CEP desejado"
+            className="bg-transparent px-4 py-2 outline-none"
             autoComplete="none"
           />
         </div>
         <button
-          className="group pl-4 pr-6 text-indigo-600 hover:text-indigo-400"
+          className="pl-4 pr-6 text-indigo-600 transition group-hover:text-indigo-800"
           onClick={handleSearch}
         >
           Buscar
@@ -46,7 +54,8 @@ export default function Search() {
 
       {Object.keys(cep).length > 0 && (
         <h2>
-          {cep.logradouro}, {cep.bairro} - {cep.localidade}/{cep.uf}
+          {cep.logradouro ?? ""}, {cep.bairro ?? ""} - {cep.localidade ?? ""}/
+          {cep.uf ?? ""} &#40;{cep.cep}&#41;
         </h2>
       )}
     </>

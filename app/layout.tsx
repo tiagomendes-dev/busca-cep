@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={(inter.className, "w-full")}>
+      <body className={(inter.className, "h-[calc(100vh-3.5rem)] w-full")}>
         <Header />
         {children}
       </body>

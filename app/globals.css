@@ -11,3 +11,9 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.shadow {
+  -webkit-box-shadow: 5px 0px 0px 3px rgba(255, 255, 255, 0.75);
+  -moz-box-shadow: 5px 0px 0px 3px rgba(255, 255, 255, 0.75);
+  box-shadow: 5px 0px 0px 3px rgba(255, 255, 255, 0.75);
+}
