@@ -29,10 +29,11 @@ export default function Search() {
         <div className="rounded-full bg-zinc-200">
           <input
             type="number"
-            value={input}
+            value={input.replace(/\D/g, "").slice(0, 8)}
             onChange={(e) => setInput(e.target.value)}
             className="bg-transparent px-4 py-2 outline-none"
             placeholder="Digite o CEP desejado"
+            autoComplete="none"
           />
         </div>
         <button
@@ -44,14 +45,9 @@ export default function Search() {
       </div>
 
       {Object.keys(cep).length > 0 && (
-        <div className="resultsArea">
-          <h2>CEP: {cep.cep}</h2>
-          <span>Rua: {cep.logradouro}</span>
-          <span>Bairro: {cep.bairro}</span>
-          <span>
-            Cidade: {cep.localidade}/{cep.uf}
-          </span>
-        </div>
+        <h2>
+          {cep.logradouro}, {cep.bairro} - {cep.localidade}/{cep.uf}
+        </h2>
       )}
     </>
   );
