@@ -38,7 +38,7 @@ export default function Search() {
           <IMaskInput
             mask="00000-000"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => setInput(e.currentTarget.value)}
             placeholder="Digite o CEP desejado"
             className="bg-transparent px-4 py-2 outline-none"
             autoComplete="none"
