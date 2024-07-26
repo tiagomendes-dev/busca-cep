@@ -53,7 +53,7 @@ export default function Search() {
       </div>
 
       {Object.keys(cep).length > 0 && (
-        <h2>
+        <h2 className="px-4 text-center">
           {cep.logradouro ?? ""}, {cep.bairro ?? ""} - {cep.localidade ?? ""}/
           {cep.uf ?? ""} &#40;{cep.cep}&#41;
         </h2>
