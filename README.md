@@ -1,5 +1,5 @@
 <div>
-  <a href="https://busca-cep-two-pi.vercel.app/">Demonstração</a>
+  <a href="https://busca-cep-two-pi.vercel.app/" target="_blank">Demonstração</a>
 </div>
 
 <h1 align="center" id="top">BuscaCEP</h1>
